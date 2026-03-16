@@ -1,0 +1,44 @@
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# ── Prompt ──────────────────────────────────────────
+# Use starship prompt if available
+if command -v starship &>/dev/null; then
+  eval "$(starship init bash)"
+fi
+
+# ── Aliases ─────────────────────────────────────────
+alias ll='ls -la'
+alias la='ls -A'
+alias l='ls -CF'
+alias ..='cd ..'
+alias ...='cd ../..'
+
+# Git shortcuts
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git log --oneline --graph'
+alias gd='git diff'
+
+# Neovim
+alias v='nvim'
+alias vim='nvim'
+
+# ── PATH additions ──────────────────────────────────
+[[ -d "$HOME/.local/bin" ]] && export PATH="$HOME/.local/bin:$PATH"
+[[ -d "$HOME/.cargo/bin" ]] && export PATH="$HOME/.cargo/bin:$PATH"
+
+# Cargo env
+[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
+
+# ── Tool integrations (if installed) ────────────────
+# mise (runtime version manager)
+command -v mise &>/dev/null && eval "$(mise activate bash)"
+
+# fzf
+[[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
+
+# ── User additions ──────────────────────────────────
+# Add your own exports, aliases, and functions below
